@@ -16,8 +16,8 @@ var currentLocaleDate ="";
 
 async function getCommitsByDay() {
     const { data } = await octokit.rest.repos.listCommits({
-        repo: "Learning-and-Projects",
-        owner: "adamak93"
+        repo: process.env.GH_REPO,
+        owner: process.env.GH_AUTHOR
     });
     currentLocaleDate = (new Date().toLocaleString("sv", {timeZone: "America/Toronto"})).slice(0,10);
     commitDate = (data[0].commit.author.date).slice(0,10);

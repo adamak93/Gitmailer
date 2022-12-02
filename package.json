@@ -1,0 +1,19 @@
+{
+  "name": "gitmailer",
+  "version": "1.0.0",
+  "description": "To email a user if no git commits have been made",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@octokit/rest": "^19.0.5",
+    "dotenv": "^16.0.3",
+    "moment": "^2.29.4",
+    "node-cron": "^3.0.2",
+    "nodemailer": "^6.8.0",
+    "octokit": "^2.0.10"
+  }
+}

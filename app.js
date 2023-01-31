@@ -50,16 +50,20 @@ const transporter = nodemailer.createTransport({
 
 cron.schedule('59 23 * * 1-6 ', () => {
     getCommitsByDay();
-    if (currentLocaleDate != commitDate ) {
-        transporter.sendMail(mailNoCommitOptions, (error, info) => {
-            if(error) {
-                console.log(error);
-            }
-        });
-    } else {
+    if (currentLocaleDate == commitDate ) {
         transporter.sendMail(mailCommitOptions, (error, info) => {
             if(error) {
                 console.log(error);
+            } else {
+                console.log("commit found email success")
+            }
+        });
+    } else {
+        transporter.sendMail(mailNoCommitOptions, (error, info) => {
+            if(error) {
+                console.log(error);
+            } else {
+                console.log("no commit found email success")
             }
         });    }
 }, {

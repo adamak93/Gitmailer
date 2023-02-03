@@ -73,7 +73,7 @@ async function getCommitsByDay() {
 }
 
 cron.schedule(
-	'30 02 * * 1-5 ',
+	'59 23 * * 1-5 ',
 	() => {
 		getCommitsByDay();
 	},

@@ -42,10 +42,11 @@ async function getCommitsByDay() {
 		repo: process.env.GH_REPO,
 		owner: process.env.GH_AUTHOR,
 	});
-	var currentLocaleDate = new Date()
+	const currentLocaleDate = new Date()
 		.toLocaleString('sv', { timeZone: 'America/Toronto' })
 		.slice(0, 10);
-	var commitDate = data[0].commit.author.date.slice(0, 10);
+	const commitDate = data[0].commit.author.date.slice(0, 10);
+	console.log(currentLocaleDate + 'and ' + commitDate);
 	if (commitDate === currentLocaleDate) {
 		transporter.sendMail(mailCommitOptions, (error, info) => {
 			if (error) {
@@ -65,10 +66,12 @@ async function getCommitsByDay() {
 	}
 }
 
-cron.schedule('59 23 * * 1-5 ', () => {
-	getCommitsByDay();
-},
-	      {
+cron.schedule(
+	'59 13 * * 1-5 ',
+	() => {
+		getCommitsByDay();
+	},
+	{
 		scheduled: true,
 		timezone: 'America/Toronto',
 	}

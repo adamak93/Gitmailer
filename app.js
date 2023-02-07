@@ -35,6 +35,7 @@ const mailCommitOptions = {
 
 const octokit = new Octokit({
 	auth: process.env.GH_KEY,
+	timeZone: 'America/Toronto',
 });
 
 async function getCommitsByDay() {
@@ -42,11 +43,13 @@ async function getCommitsByDay() {
 		repo: process.env.GH_REPO,
 		owner: process.env.GH_AUTHOR,
 	});
-	const currentLocaleDate = new Date()
-		.toLocaleString('sv', { timeZone: 'America/Toronto' })
-		.slice(0, 10);
+	console.log(data[0]);
+
+	const currentLocaleDate = new Date().toLocaleString('sv', {
+		timeZone: 'America/Toronto',
+	});
 	const commitDate = data[0].commit.author.date.slice(0, 10);
-	console.log(currentLocaleDate + 'and ' + commitDate);
+	console.log(currentLocaleDate + ' and ' + commitDate);
 	if (commitDate === currentLocaleDate) {
 		transporter.sendMail(mailCommitOptions, (error, info) => {
 			if (error) {
@@ -66,8 +69,10 @@ async function getCommitsByDay() {
 	}
 }
 
+getCommitsByDay();
+
 cron.schedule(
-	'59 23 * * 1-5 ',
+	'0 0 * * 1-5 ',
 	() => {
 		getCommitsByDay();
 	},

@@ -12,6 +12,7 @@
     "@octokit/rest": "^19.0.7",
     "dotenv": "^16.0.3",
     "moment": "^2.29.4",
+    "moment-timezone": "^0.5.40",
     "node-cron": "^3.0.2",
     "nodemailer": "^6.8.0",
     "octokit": "^2.0.10"
